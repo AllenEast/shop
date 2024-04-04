@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block poster %}
+
+{% endblock poster %}
+
+
+{% block main %}
+{% load static %}
+<section class="product_section ">
+    <div class="container">
+      <div class="product_heading">
+        <h2>
+            Watches
+        </h2>
+      </div>
+        <div class="products_filter ">
+                <div class="container">
+                    <div class="row justify-content-around">
+                        {% include 'store/components/_sorters.html' %}
+
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    {% for product in products %}
+                    {% include 'store/components/_product_cart.html' %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% include 'store/components/_pagination.html' %}
+
+    </div>
+
+  </section>
+
+
+{% endblock main %}
+

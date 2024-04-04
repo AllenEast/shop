@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block poster %}
+
+{% endblock poster %}
+
+
+{% block main %}
+<main>
+    <div class="container p-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box-element">
+                    <table class="table">
+                        <div class="d-flex justify-content-around align-items-center">
+                            <h5>Products: <strong>{{ order.get_cart_total_quantity }}</strong></h5>
+                            <h5>Price: <strong>{{ order.get_cart_total_price }}$</strong></h5>
+                        </div>
+                    </table>
+                </div>
+                <br>
+
+                <div class="box-element">
+                    <div class="cart-row">
+                        <div style="flex:2"></div>
+                        <div style="flex:2"><strong>Product</strong></div>
+                        <div style="flex:1"><strong>Price</strong></div>
+                        <div style="flex:1"><strong>Quantity</strong></div>
+                        <div style="flex:1"><strong>Final price</strong></div>
+                    </div>
+                    {% for item in products %}
+                    {% include 'store/components/_cart_row.html' %}
+                    {% endfor %}
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <a href="{% url 'product_list' %}" class="btn btn-dark rounded">Back</a>
+                        <a href="{% url 'clear_cart' %}" class="btn btn-danger rounded">Clear</a>
+                    </div>
+                    <a href="{% url 'checkout' %}" class="btn btn-success rounded">Order</a>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock main %}

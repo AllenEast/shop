@@ -1,0 +1,92 @@
+
+{% load static %}
+{% load store_tags %}
+{% for category in categories %}
+<section class="product_section ">
+    <div class="container">
+      <div class="product_heading">
+        <h2 class="text-center">
+          {{ category.title }}
+        </h2>
+      </div>
+      {% for cat in category.subcategories.all %}
+      <h2 class="main_title text-center">{{ cat.title }}</h2>
+      <div class="product_container" >
+        <div class="box">
+          {% for product in cat.products.all %}
+          <div class="box-content">
+            <div class="img-box">
+              <a href="{{ product.get_absolute_url }}">
+                <img src="{{ product.get_first_photo }}" alt="">
+              </a>
+            </div>
+            <div class="detail-box">
+              <div class="text">
+                <h6>
+                  {{ product.title }}
+                </h6>
+                <h5>
+                  <span>$</span> {{ product.price }}
+                </h5>
+              </div>
+              <div class="like">
+                <h6>
+                  Like
+                </h6>
+                <div class="star_container">
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                    {% if request.user.is_authenticated %}
+                    {% get_favourite_products request.user as fav_products %}
+                    {% endif %}
+                  <div class="product_card-basket text-center">
+            {% if product in fav_products and request.user.is_authenticated %}
+            <a href="{% url 'add_favourite' product.slug %}" class="">
+                <svg width="28" height="24" viewBox="0 0 28 24" fill="#000000"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path
+                            d="M8.375 1C4.57813 1 1.5 4.07813 1.5 7.875C1.5 14.75 9.625 21 14 22.4538C18.375 21 26.5 14.75 26.5 7.875C26.5 4.07813 23.4219 1 19.625 1C17.3 1 15.2438 2.15438 14 3.92125C13.3661 3.01825 12.5239 2.28131 11.5447 1.77281C10.5656 1.2643 9.47831 0.999222 8.375 1Z"
+                            stroke="#0F2859" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                </svg>
+            </a>
+            {% else %}
+            <a href="{% url 'add_favourite' product.slug %}" class="">
+
+
+                                    <svg width="28" height="24" viewBox="0 0 28 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M8.375 1C4.57813 1 1.5 4.07813 1.5 7.875C1.5 14.75 9.625 21 14 22.4538C18.375 21 26.5 14.75 26.5 7.875C26.5 4.07813 23.4219 1 19.625 1C17.3 1 15.2438 2.15438 14 3.92125C13.3661 3.01825 12.5239 2.28131 11.5447 1.77281C10.5656 1.2643 9.47831 0.999222 8.375 1Z"
+                                            stroke="#0F2859" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+            {% endif %}
+        </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="btn-box">
+            {% if product.quantity > 0 %}
+            <a href="{% url 'to_cart' product.pk 'add' %}">
+              Add To Cart
+            </a>
+            {% else %}
+             <a href="">
+              Not Available
+            </a>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endfor %}

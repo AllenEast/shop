@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block poster %}
+
+{% endblock poster %}
+
+
+{% block main %}
+ <main>
+        <section class="product_detail">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        {% include 'store/components/_product_slider.html' %}
+
+                    </div>
+                    <div class="col-md-6">
+                        {% include 'store/components/_product_detail-info.html' %}
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+         {% include 'store/components/_brand-info.html' %}
+
+        {% include 'store/components/_customer_reviews.html' %}
+    <div class="text-center p-2">
+     <p>
+  <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+    Type comment
+  </button>
+</p>
+<div style="min-height: 120px; margin-left: 700px;">
+  <div class="collapse collapse-horizontal" id="collapseWidthExample">
+    <div class="card card-body" style="width: 500px;">
+        <form action="{% url 'save_review' product.pk %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ review_form.text }}
+            <button class="btn btn-success rounded" type="submit">Add comment</button>
+        </form>
+    </div>
+  </div>
+</div>
+    </div>
+
+
+        <div class="recommended_goods">
+            <h2 class="product_detail-main-title text-center">You may also like</h2>
+
+            <!-- PRODUCTS BLOCK START -->
+            <div class="container">
+                <div class="row">
+                  {% for product in products %}
+                  {% include 'store/components/_product_cart.html' %}
+                  {% endfor %}
+                </div>
+            </div>
+            <!-- PRODUCTS BLOCK END -->
+
+        </div>
+
+
+        <!-- BLOCK EMAIL FORM START -->
+     {% include 'store/components/_email_form.html' %}
+
+        <!-- BLOCK EMAIL FORM END -->
+</main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="owl-carousel/js/owl.carousel.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="js/index.js"></script>
+{% endblock main %}

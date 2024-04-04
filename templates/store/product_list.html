@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block main %}
+<main>
+
+<!-- product section -->
+  {% include 'store/components/_top_sale.html' %}
+
+
+  <!-- end product section -->
+
+
+  <!-- product section -->
+  {% include 'store/components/_feature.html' %}
+
+
+  <!-- end product section -->
+
+
+  <!-- product section -->
+  {% include 'store/components/_new_arrivals.html' %}
+
+  {% include 'store/components/_carousel.html' %}
+
+  {% include 'store/components/_pagination.html' %}
+ </main>
+{% endblock main %}

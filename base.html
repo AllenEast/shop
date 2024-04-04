@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+
+
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <link rel="icon" href="{% static 'store/images/fevicon/fevicon.png' %}" type="image/gif" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>
+    {% block title %}
+
+    {% endblock title %}
+  </title>
+
+
+  {% include 'components/_style.html' %}
+  <!-- bootstrap core css -->
+
+
+</head>
+{% for message in messages %}
+    <div class="alert {{ message.tags }}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+
+<body>
+
+  <div class="hero_area">
+    <!-- header section strats -->
+    {% include 'components/_header_navbar.html' %}
+
+
+    <!-- end header section -->
+    <!-- slider section -->
+
+    <section class="slider_section ">
+
+      {% include 'components/_poster.html' %}
+
+      {% include 'components/_carousel.html' %}
+
+    </section>
+  </div>
+    <!-- end slider section -->
+
+
+
+  <!-- service section -->
+  {% include 'components/_service.html' %}
+
+
+  <!-- end service section -->
+
+
+  <!-- about section -->
+  {% include 'components/_about_section.html' %}
+
+  <!-- end about section -->
+
+  {% block main %}
+
+
+
+  {% endblock main %}
+  <!-- end product section -->
+
+  <!-- contact section -->
+  {% include 'components/_contact.html' %}
+
+  <!-- end contact section -->
+
+
+  <!-- client section -->
+  {% include 'components/_client.html' %}
+
+  <!-- end client section -->
+
+
+  <!-- info section -->
+  {% include 'components/_hand_time.html' %}
+
+
+  <!-- end info_section -->
+
+  <!-- footer section -->
+  {% include 'components/_footer.html' %}
+
+  <!-- footer section -->
+
+  <!-- jQery -->
+  {% include 'components/_script.html' %}
+
+
+</body>
+
+</html>
